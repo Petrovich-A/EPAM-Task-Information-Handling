@@ -1,23 +1,24 @@
 package by.petrovich.handling.entity;
 
-public enum CompositeType {
+public enum TextComponentType {
+    TEXT("\t", "\n"),
     PARAGRAPH("\t", "\b\n\r"),
-    SENTENCE(),
-    LEXEME(" "),
-    WORD(""),
-    SYMBOL();
+    SENTENCE("", " "),
+    LEXEME("", " "),
+    WORD("", ""),
+    SYMBOL("", "");
 
     private String prefix = "";
     private String postfix = "";
 
-    CompositeType() {
+    TextComponentType() {
     }
 
-    CompositeType(String postfix) {
+    TextComponentType(String postfix) {
         this.postfix = postfix;
     }
 
-    CompositeType(String prefix, String postfix) {
+    TextComponentType(String prefix, String postfix) {
         this.prefix = prefix;
         this.postfix = postfix;
     }
