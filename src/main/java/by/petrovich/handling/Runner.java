@@ -10,7 +10,7 @@ public class Runner {
     public static void main(String[] args) {
         DocumentParser documentParser = new DocumentParser();
         try {
-            documentParser.parse("s");
+            documentParser.parse("src/main/resources/files/textExample.txt");
         } catch (CompositeException e) {
             e.printStackTrace();
         }
