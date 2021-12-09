@@ -4,11 +4,16 @@ import java.util.List;
 
 public interface TextComponent {
 
-    List<TextComponent> getComponents();
+    List<TextComponent> createAllComponents();
 
-    void add(TextComponent textComponent);
+    boolean add(TextComponent textComponent);
 
-    void remove(TextComponent textComponent);
+    boolean remove(TextComponent textComponent);
+
+    TextComponentType getTextComponentType();
 
     int size();
+
+    String toString();
+
 }
