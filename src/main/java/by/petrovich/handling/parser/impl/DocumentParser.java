@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 public class DocumentParser implements TextParser {
     static Logger logger = LogManager.getLogger();
     private static final String PARAGRAPH_DELIMITER_REGEX = "\\n\\s+";
-    private TextParser textParser = new DocumentParser();
+//    private TextParser textParser = new DocumentParser();
 
     public DocumentParser() {
     }
@@ -21,15 +21,14 @@ public class DocumentParser implements TextParser {
     @Override
     public TextComponent parse(String text) throws CompositeException {
         if (text == null || text.isBlank()) {
-            logger.log(Level.INFO, "DocumentParser: ", text);
+            logger.log(Level.INFO, "DocumentParser: {}", text);
         }
         TextComposite textComposite = new TextComposite(TextComponentType.TEXT);
-        for (String paragraph : text.split(PARAGRAPH_DELIMITER_REGEX)){
+        for (String paragraph : text.split(PARAGRAPH_DELIMITER_REGEX)) {
             logger.log(Level.INFO, "paragraph: {}", paragraph);
-            TextComponent paragraphComponent = textParser.parse(paragraph);
+//            TextComponent paragraphComponent = textParser.parse(paragraph);
         }
         logger.log(Level.INFO, "DocumentParser: text parsed ");
-
         return textComposite;
     }
 }

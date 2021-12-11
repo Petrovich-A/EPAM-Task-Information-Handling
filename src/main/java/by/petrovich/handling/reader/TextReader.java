@@ -6,30 +6,43 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 public class TextReader {
     static Logger logger = LogManager.getLogger();
-    private static final String LINE_DELIMITER_REGEX = "\n";
 
     public String read(String filePath) throws CompositeException {
-        if (filePath == null || filePath.isBlank()){
+        if (filePath == null || filePath.isBlank()) {
             throw new CompositeException(String.format("File %s not found", filePath));
         }
-        String text = "";
-        Path path = Paths.get(filePath);
-        try (BufferedReader bufferedReader = Files.newBufferedReader(path)) {
-            bufferedReader.lines().collect(Collectors.joining(LINE_DELIMITER_REGEX));
+        BufferedReader bufferedReader = null;
+        String fileText = null;
+        try {
+            File file = new File(filePath);
+            bufferedReader = new BufferedReader(new FileReader(file));
+            StringBuilder stringBuilder = new StringBuilder();
+            String currentLine;
+
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                stringBuilder.append(currentLine);
+                stringBuilder.append("\n");
+            }
+            fileText = stringBuilder.toString();
+
         } catch (IOException e) {
-            logger.log(Level.ERROR, "read: file isn't read", e);
-            throw new CompositeException("read: during read file", e);
+            logger.log(Level.ERROR, "TextReader: read: file isn't read", e);
+        } finally {
+            try {
+                if (bufferedReader != null)
+                    bufferedReader.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         }
-        logger.log(Level.INFO, "read: File {} is read", path.getFileName());
-        return text;
+        logger.log(Level.INFO, "TextReader: read: File is read: {}", fileText);
+        return fileText;
     }
 
 }
