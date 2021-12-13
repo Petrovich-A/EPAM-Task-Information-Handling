@@ -1,7 +1,9 @@
 package by.petrovich.handling.entity;
 
 public enum SymbolType {
-    LETTER,
+    VOWEL,
+    CONSONANT,
     PUNCTUATION,
-    DIGIT
+    DIGIT,
+    UNKNOWN
 }

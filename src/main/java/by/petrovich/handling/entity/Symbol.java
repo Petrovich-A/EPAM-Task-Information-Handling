@@ -11,6 +11,10 @@ public class Symbol implements TextComponent {
         this.symbolType = symbolType;
     }
 
+    public void setSymbolType(SymbolType symbolType) {
+        this.symbolType = symbolType;
+    }
+
     @Override
     public List<TextComponent> createAllComponents() {
         throw new UnsupportedOperationException();

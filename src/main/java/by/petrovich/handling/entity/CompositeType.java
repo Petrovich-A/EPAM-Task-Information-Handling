@@ -4,7 +4,6 @@ public enum CompositeType {
     TEXT("\t", "\n"),
     PARAGRAPH("\t", "\b\n\r"),
     SENTENCE("", " "),
-    LEXEME("", " "),
     WORD("", ""),
     SYMBOL("", "");
 

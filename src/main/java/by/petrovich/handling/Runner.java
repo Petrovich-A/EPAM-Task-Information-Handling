@@ -1,7 +1,9 @@
 package by.petrovich.handling;
 
+import by.petrovich.handling.entity.TextComponent;
 import by.petrovich.handling.exception.CompositeException;
 import by.petrovich.handling.parser.impl.DocumentParser;
+import by.petrovich.handling.parser.impl.WordParser;
 import by.petrovich.handling.reader.TextReader;
 
 /**
@@ -14,15 +16,19 @@ public class Runner {
         String textFromReader = null;
         try {
             textFromReader = textReader.read(filePath);
+            WordParser wordParser = WordParser.getInstance();
+            wordParser.parse("бандерлоги.");
         } catch (CompositeException e) {
             e.printStackTrace();
         }
         DocumentParser documentParser = DocumentParser.getInstance();
         try {
-            documentParser.parse(textFromReader);
+            TextComponent textComponent = documentParser.parse(textFromReader);
+            System.out.println(textComponent);
         } catch (CompositeException e) {
             e.printStackTrace();
         }
+
 
     }
 }

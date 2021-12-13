@@ -9,11 +9,9 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
-
 public class DocumentParser implements TextParser {
     static Logger logger = LogManager.getLogger();
-    private static final String PARAGRAPH_DELIMITER_REGEX = "\\n\\s+";
+    private static final String PARAGRAPH_DELIMITER_REGEX = "\\n";
     private static final DocumentParser instance = new DocumentParser();
     private final TextParser paragraphParser = ParagraphParser.getInstance();
 
@@ -30,15 +28,13 @@ public class DocumentParser implements TextParser {
             logger.log(Level.INFO, "DocumentParser: text is empty");
         }
         TextComposite documentComposite = new TextComposite(CompositeType.TEXT);
-        String[] paragraphs = text.split(PARAGRAPH_DELIMITER_REGEX);
 
-        for (String paragraph : paragraphs) {
-            TextComponent paragraphComposite =  paragraphParser.parse(paragraph);
+        for (String paragraph : text.split(PARAGRAPH_DELIMITER_REGEX)) {
+            TextComponent paragraphComposite = paragraphParser.parse(paragraph);
             documentComposite.add(paragraphComposite);
-            System.out.println("sdfsdf: " + paragraph);
-            logger.log(Level.INFO, "paragraphComposite: \n {} ", Arrays.toString(paragraphs));
+            logger.log(Level.INFO, "paragraph: {} ", paragraph);
         }
-        logger.log(Level.INFO, "DocumentParser: text is parsed {} ", documentComposite.toString());
+        logger.log(Level.INFO, "DocumentParser: text is parsed {} ", documentComposite.toString(), documentComposite.size());
         return documentComposite;
     }
 

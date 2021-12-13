@@ -65,10 +65,12 @@ public class TextComposite implements TextComponent {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("TextComposite{");
-        sb.append("textComponentType=").append(componentType);
-        sb.append(", textComponents=").append(textComponents);
-        sb.append('}');
-        return sb.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (TextComponent element : textComponents) {
+            stringBuilder.append(componentType.getPrefix())
+                    .append(element.toString())
+                    .append(componentType.getPostfix());
+        }
+        return stringBuilder.toString();
     }
 }
