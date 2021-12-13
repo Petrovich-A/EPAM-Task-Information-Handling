@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
-    private TextComponentType textComponentType;
+    private CompositeType componentType;
     private List<TextComponent> textComponents;
 
-    public TextComposite(TextComponentType textComponentType, List<TextComponent> textComponents) {
-        this.textComponentType = textComponentType;
+    public TextComposite(CompositeType textComponentType, List<TextComponent> textComponents) {
+        this.componentType = textComponentType;
         this.textComponents = textComponents;
     }
 
-    public TextComposite(TextComponentType textComponentType) {
+    public TextComposite(CompositeType textComponentType) {
         this(textComponentType, new ArrayList<TextComponent>());
     }
 
-    public void setTextComponentType(TextComponentType textComponentType) {
-        this.textComponentType = textComponentType;
+    public void setComponentType(CompositeType componentType) {
+        this.componentType = componentType;
     }
 
     @Override
-    public TextComponentType getTextComponentType() {
-        return textComponentType;
+    public CompositeType getComponentType() {
+        return componentType;
     }
 
     @Override
@@ -43,5 +43,32 @@ public class TextComposite implements TextComponent {
     @Override
     public int size() {
         return textComponents.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TextComposite that = (TextComposite) o;
+
+        if (getComponentType() != that.getComponentType()) return false;
+        return textComponents != null ? textComponents.equals(that.textComponents) : that.textComponents == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getComponentType() != null ? getComponentType().hashCode() : 0;
+        result = 31 * result + (textComponents != null ? textComponents.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("TextComposite{");
+        sb.append("textComponentType=").append(componentType);
+        sb.append(", textComponents=").append(textComponents);
+        sb.append('}');
+        return sb.toString();
     }
 }

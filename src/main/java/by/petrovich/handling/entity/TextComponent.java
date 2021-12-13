@@ -10,7 +10,7 @@ public interface TextComponent {
 
     boolean remove(TextComponent textComponent);
 
-    TextComponentType getTextComponentType();
+    CompositeType getComponentType();
 
     int size();
 

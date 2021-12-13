@@ -1,6 +1,6 @@
 package by.petrovich.handling.entity;
 
-public enum TextComponentType {
+public enum CompositeType {
     TEXT("\t", "\n"),
     PARAGRAPH("\t", "\b\n\r"),
     SENTENCE("", " "),
@@ -11,14 +11,7 @@ public enum TextComponentType {
     private String prefix = "";
     private String postfix = "";
 
-    TextComponentType() {
-    }
-
-    TextComponentType(String postfix) {
-        this.postfix = postfix;
-    }
-
-    TextComponentType(String prefix, String postfix) {
+    CompositeType(String prefix, String postfix) {
         this.prefix = prefix;
         this.postfix = postfix;
     }

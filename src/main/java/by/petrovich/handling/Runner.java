@@ -11,14 +11,15 @@ public class Runner {
     public static void main(String[] args) {
         String filePath = "src/main/resources/files/textExample.txt";
         TextReader textReader = new TextReader();
+        String textFromReader = null;
         try {
-            textReader.read(filePath);
+            textFromReader = textReader.read(filePath);
         } catch (CompositeException e) {
             e.printStackTrace();
         }
-        DocumentParser documentParser = new DocumentParser();
+        DocumentParser documentParser = DocumentParser.getInstance();
         try {
-            documentParser.parse("src/main/resources/files/textExample.txt");
+            documentParser.parse(textFromReader);
         } catch (CompositeException e) {
             e.printStackTrace();
         }

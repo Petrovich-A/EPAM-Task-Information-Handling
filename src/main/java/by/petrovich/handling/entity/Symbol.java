@@ -27,8 +27,8 @@ public class Symbol implements TextComponent {
     }
 
     @Override
-    public TextComponentType getTextComponentType() {
-        return TextComponentType.SYMBOL;
+    public CompositeType getComponentType() {
+        return CompositeType.SYMBOL;
     }
 
     @Override

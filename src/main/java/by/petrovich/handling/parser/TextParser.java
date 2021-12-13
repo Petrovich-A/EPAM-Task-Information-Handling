@@ -5,5 +5,4 @@ import by.petrovich.handling.exception.CompositeException;
 
 public interface TextParser {
     TextComponent parse(String text) throws CompositeException;
-
 }
