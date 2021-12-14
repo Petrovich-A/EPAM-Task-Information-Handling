@@ -30,15 +30,19 @@ public class SymbolParser implements TextParser {
         Symbol symbol = new Symbol(text.charAt(0), SymbolType.UNKNOWN);
         TextComposite symbolComposite = new TextComposite(CompositeType.SYMBOL);
         if (text.matches(DIGIT_REGEX)) {
+            symbol.setSymbol(text.charAt(0));
             symbol.setSymbolType(SymbolType.DIGIT);
         } else if (text.matches(PUNCT_REGEX)) {
+            symbol.setSymbol(text.charAt(0));
             symbol.setSymbolType(SymbolType.PUNCTUATION);
         } else if (text.matches(VOWEL_REGEX)) {
+            symbol.setSymbol(text.charAt(0));
             symbol.setSymbolType(SymbolType.VOWEL);
         } else {
+            symbol.setSymbol(text.charAt(0));
             symbol.setSymbolType(SymbolType.CONSONANT);
         }
-        logger.log(Level.INFO, "symbol: {} ", symbol);
+        logger.log(Level.INFO, "symbol type: {} ", String.valueOf(symbol.getSymbolType()));
         symbolComposite.add(symbol);
         return symbolComposite;
     }

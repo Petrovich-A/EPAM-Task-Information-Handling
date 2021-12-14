@@ -17,7 +17,6 @@ public class Runner {
         try {
             textFromReader = textReader.read(filePath);
             WordParser wordParser = WordParser.getInstance();
-            wordParser.parse("бандерлоги.");
         } catch (CompositeException e) {
             e.printStackTrace();
         }
@@ -27,7 +26,5 @@ public class Runner {
         } catch (CompositeException e) {
             e.printStackTrace();
         }
-
-
     }
 }

@@ -26,12 +26,12 @@ public class WordParser implements TextParser {
         if (text == null || text.isBlank()) {
             throw new CompositeException("WordParser: text is empty");
         }
+        TextComponent wordComposite = new TextComposite(CompositeType.WORD);
 
-        TextComponent wordComposite;
-        wordComposite = new TextComposite(CompositeType.WORD);
         for (String symbol : text.split("")) {
+            TextComponent symbolComposite = symbolParser.parse(symbol);
             logger.log(Level.INFO, "symbol: {} ", symbol);
-            wordComposite.add(symbolParser.parse(symbol));
+            wordComposite.add(symbolComposite);
         }
         return wordComposite;
     }

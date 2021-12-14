@@ -11,6 +11,14 @@ public class Symbol implements TextComponent {
         this.symbolType = symbolType;
     }
 
+    public char getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(char symbol) {
+        this.symbol = symbol;
+    }
+
     public void setSymbolType(SymbolType symbolType) {
         this.symbolType = symbolType;
     }
@@ -35,6 +43,10 @@ public class Symbol implements TextComponent {
         return CompositeType.SYMBOL;
     }
 
+    public SymbolType getSymbolType() {
+        return symbolType;
+    }
+
     @Override
     public int size() {
         return 0;
@@ -44,15 +56,17 @@ public class Symbol implements TextComponent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Symbol symbol1 = (Symbol) o;
+
         if (symbol != symbol1.symbol) return false;
-        return symbolType == symbol1.symbolType;
+        return getSymbolType() == symbol1.getSymbolType();
     }
 
     @Override
     public int hashCode() {
         int result = symbol;
-        result = 31 * result + (symbolType != null ? symbolType.hashCode() : 0);
+        result = 31 * result + (getSymbolType() != null ? getSymbolType().hashCode() : 0);
         return result;
     }
 
@@ -60,4 +74,5 @@ public class Symbol implements TextComponent {
     public String toString() {
         return String.valueOf(symbol);
     }
+
 }

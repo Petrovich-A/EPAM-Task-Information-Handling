@@ -30,11 +30,11 @@ public class DocumentParser implements TextParser {
         TextComposite documentComposite = new TextComposite(CompositeType.TEXT);
 
         for (String paragraph : text.split(PARAGRAPH_DELIMITER_REGEX)) {
+            logger.log(Level.INFO, "paragraph: {} ", paragraph);
             TextComponent paragraphComposite = paragraphParser.parse(paragraph);
             documentComposite.add(paragraphComposite);
-            logger.log(Level.INFO, "paragraph: {} ", paragraph);
         }
-        logger.log(Level.INFO, "DocumentParser: text is parsed {} ", documentComposite.toString(), documentComposite.size());
+        logger.log(Level.INFO, "DocumentParser: text is parsed: {}, size: {}", documentComposite.toString(), documentComposite.size());
         return documentComposite;
     }
 

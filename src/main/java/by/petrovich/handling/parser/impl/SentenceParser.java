@@ -31,8 +31,8 @@ public class SentenceParser implements TextParser{
 
         for (String word : text.split(WORD_DELIMITER_REGEX)){
             logger.log(Level.INFO, "word: {}", word);
-            TextComponent wordComponent = wordParser.parse(word);
-            sentenceComposite.add(wordComponent);
+            TextComponent wordComposite = wordParser.parse(word);
+            sentenceComposite.add(wordComposite);
         }
         return sentenceComposite;
     }
