@@ -5,6 +5,9 @@ import by.petrovich.handling.entity.TextComponent;
 import by.petrovich.handling.entity.TextComposite;
 import by.petrovich.handling.exception.CompositeException;
 import by.petrovich.handling.parser.impl.DocumentParser;
+import by.petrovich.handling.parser.impl.ParagraphParser;
+import by.petrovich.handling.parser.impl.SentenceParser;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,6 +38,15 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
         return allComponents;
     }
 
+    public TextComponent findSentenceWithLongestWord (String filePath) throws CompositeException {
+        SentenceParser sentenceParser = SentenceParser.getInstance();
+        TextComponent sentenceComposite = sentenceParser.parse(filePath);
+//        List<TextComponent> words =
+
+        return null;
+    }
+
+
     @Override
     public TextComponent paragraphSort(String filePath) throws CompositeException {
         DocumentParser documentParser = DocumentParser.getInstance();
@@ -48,6 +60,19 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
             sortedText.add(paragraph);
         }
         return sortedText;
+    }
+
+    public TextComponent findLongestWord(String filePath) throws CompositeException {
+        SentenceParser sentenceParser = SentenceParser.getInstance();
+        TextComponent sentenceComposite = sentenceParser.parse(filePath);
+        List<TextComponent> sentences = sentenceComposite.createAllComponents();
+
+        TextComponent longestWord = sentences.stream()
+                .max(Comparator.comparingInt(TextComponent::size)).orElseThrow(() ->
+                        new CompositeException("findSentenceWithLongestWord: Stream is empty"));
+
+        logger.log(Level.INFO, "The longest word is: {} ", longestWord);
+        return longestWord;
     }
 
 }

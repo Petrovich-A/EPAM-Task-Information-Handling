@@ -5,8 +5,8 @@ import by.petrovich.handling.exception.CompositeException;
 
 public interface InfoHandlingService {
     TextComponent paragraphSort(String filePath) throws CompositeException;
+    TextComponent findSentenceWithLongestWord (String filePath) throws CompositeException;
 
-//    TextComponent paragraphSort(TextComponent text);
 //    List<TextComponent> findSentencesWithLongestWord(TextComponent paragraph);
 //    List<TextComponent> deleteSentences(TextComponent text , int sizeBound);
 //    Map<String, Long> countSameWords(TextComponent text);
