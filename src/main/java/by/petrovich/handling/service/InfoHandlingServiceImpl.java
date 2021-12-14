@@ -5,15 +5,20 @@ import by.petrovich.handling.entity.TextComponent;
 import by.petrovich.handling.entity.TextComposite;
 import by.petrovich.handling.exception.CompositeException;
 import by.petrovich.handling.parser.impl.DocumentParser;
-import by.petrovich.handling.parser.impl.ParagraphParser;
 import by.petrovich.handling.parser.impl.SentenceParser;
+import by.petrovich.handling.parser.impl.WordParser;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 public class InfoHandlingServiceImpl implements InfoHandlingService {
+    private static final String VOWEL_REGEX = "[aeiouAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ]";
     private static Logger logger = LogManager.getLogger();
 
     public List<TextComponent> findAllComponents(TextComponent textComponent, CompositeType compositeType) {
@@ -38,12 +43,24 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
         return allComponents;
     }
 
-    public TextComponent findSentenceWithLongestWord (String filePath) throws CompositeException {
+    public TextComponent findSentenceWithLongestWord(String filePath) throws CompositeException {
         SentenceParser sentenceParser = SentenceParser.getInstance();
         TextComponent sentenceComposite = sentenceParser.parse(filePath);
 //        List<TextComponent> words =
 
         return null;
+    }
+
+    @Override
+    public long countVowel(String filePath) throws CompositeException {
+        WordParser wordParser = WordParser.getInstance();
+        TextComponent wordComposite = wordParser.parse(filePath);
+        List<TextComponent> symbols = wordComposite.createAllComponents();
+
+        long vowelCount = symbols.stream().filter(o -> o.toString().matches(VOWEL_REGEX)).count();
+
+        logger.log(Level.INFO, "The are {} vowels text contains", vowelCount);
+        return vowelCount;
     }
 
 
