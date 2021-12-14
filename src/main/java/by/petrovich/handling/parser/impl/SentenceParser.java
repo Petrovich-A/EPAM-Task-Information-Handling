@@ -24,6 +24,9 @@ public class SentenceParser implements TextParser{
 
     @Override
     public TextComponent parse(String text) throws CompositeException {
+        if (text == null || text.isBlank()){
+            throw new CompositeException("SentenceParser: text is empty");
+        }
         TextComposite sentenceComposite = new TextComposite(CompositeType.SENTENCE);
 
         for (String word : text.split(WORD_DELIMITER_REGEX)){

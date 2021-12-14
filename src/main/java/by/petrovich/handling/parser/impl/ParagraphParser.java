@@ -36,7 +36,7 @@ public class ParagraphParser implements TextParser {
 
         while (matcher.find()){
             String sentence = matcher.group();
-            logger.log(Level.INFO, "Sentence: {}", sentence);
+            logger.log(Level.INFO, "Sentence: {} ", sentence);
             TextComponent sentenceComponent = sentenceParser.parse(sentence);
             paragraphComposite.add(sentenceComponent);
         }

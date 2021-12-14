@@ -24,7 +24,6 @@ public class Runner {
         DocumentParser documentParser = DocumentParser.getInstance();
         try {
             TextComponent textComponent = documentParser.parse(textFromReader);
-            System.out.println(textComponent);
         } catch (CompositeException e) {
             e.printStackTrace();
         }

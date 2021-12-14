@@ -3,6 +3,7 @@ package by.petrovich.handling.parser.impl;
 import by.petrovich.handling.entity.*;
 import by.petrovich.handling.exception.CompositeException;
 import by.petrovich.handling.parser.TextParser;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,7 @@ public class SymbolParser implements TextParser {
     @Override
     public TextComponent parse(String text) throws CompositeException {
         if (text == null || text.isBlank()) {
-            throw new CompositeException("paragraph is empty");
+            throw new CompositeException("SymbolParser: text is empty");
         }
         Symbol symbol = new Symbol(text.charAt(0), SymbolType.UNKNOWN);
         TextComposite symbolComposite = new TextComposite(CompositeType.SYMBOL);
@@ -37,6 +38,7 @@ public class SymbolParser implements TextParser {
         } else {
             symbol.setSymbolType(SymbolType.CONSONANT);
         }
+        logger.log(Level.INFO, "symbol: {} ", symbol);
         symbolComposite.add(symbol);
         return symbolComposite;
     }

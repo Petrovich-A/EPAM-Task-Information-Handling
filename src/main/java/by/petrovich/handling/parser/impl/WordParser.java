@@ -5,6 +5,7 @@ import by.petrovich.handling.entity.TextComponent;
 import by.petrovich.handling.entity.TextComposite;
 import by.petrovich.handling.exception.CompositeException;
 import by.petrovich.handling.parser.TextParser;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,12 +24,13 @@ public class WordParser implements TextParser {
     @Override
     public TextComponent parse(String text) throws CompositeException {
         if (text == null || text.isBlank()) {
-            throw new CompositeException("paragraph is empty");
+            throw new CompositeException("WordParser: text is empty");
         }
 
-        TextComponent wordComposite = new TextComposite(CompositeType.WORD);
+        TextComponent wordComposite;
         wordComposite = new TextComposite(CompositeType.WORD);
         for (String symbol : text.split("")) {
+            logger.log(Level.INFO, "symbol: {} ", symbol);
             wordComposite.add(symbolParser.parse(symbol));
         }
         return wordComposite;
