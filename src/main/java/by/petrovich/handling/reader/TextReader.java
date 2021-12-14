@@ -15,7 +15,7 @@ public class TextReader {
 
     public String read(String filePath) throws CompositeException {
         if (filePath == null || filePath.isBlank()) {
-            throw new CompositeException(String.format("File %s not found", filePath));
+            throw new CompositeException(String.format("TextReader: The file %s isn't found", filePath));
         }
         BufferedReader bufferedReader = null;
         String fileText = null;
@@ -32,7 +32,7 @@ public class TextReader {
             fileText = stringBuilder.toString();
 
         } catch (IOException e) {
-            logger.log(Level.ERROR, "TextReader: read: file isn't read", e);
+            logger.log(Level.ERROR, "TextReader: can't read the file", e);
         } finally {
             try {
                 if (bufferedReader != null)
@@ -41,7 +41,7 @@ public class TextReader {
                 exception.printStackTrace();
             }
         }
-        logger.log(Level.INFO, "TextReader: read: File is read: {}", fileText);
+        logger.log(Level.INFO, "TextReader: File is read: {}", fileText);
         return fileText;
     }
 

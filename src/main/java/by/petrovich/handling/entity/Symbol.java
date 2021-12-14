@@ -24,7 +24,7 @@ public class Symbol implements TextComponent {
     }
 
     @Override
-    public List<TextComponent> createAllComponents() {
+    public List<TextComponent> getAllComponents() {
         throw new UnsupportedOperationException();
     }
 

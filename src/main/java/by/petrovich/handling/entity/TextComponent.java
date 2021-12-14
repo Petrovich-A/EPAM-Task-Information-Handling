@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface TextComponent {
 
-    List<TextComponent> createAllComponents();
+    List<TextComponent> getAllComponents();
 
     boolean add(TextComponent textComponent);
 

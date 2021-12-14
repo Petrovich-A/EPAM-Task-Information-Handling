@@ -19,6 +19,7 @@ import java.util.Queue;
 
 public class InfoHandlingServiceImpl implements InfoHandlingService {
     private static final String VOWEL_REGEX = "[aeiouAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ]";
+    private static final String CONSONANT_REGEX = "[qwrtpsdfghjklzxcvbnm]";
     private static Logger logger = LogManager.getLogger();
 
     public List<TextComponent> findAllComponents(TextComponent textComponent, CompositeType compositeType) {
@@ -32,7 +33,7 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
             TextComponent current = queue.poll();
             if (current.getComponentType() != CompositeType.SYMBOL) {
 
-                current.createAllComponents().forEach(child -> {
+                current.getAllComponents().forEach(child -> {
                     if (child.getComponentType() == compositeType) {
                         allComponents.add(child);
                     }
@@ -46,8 +47,7 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
     public TextComponent findSentenceWithLongestWord(String filePath) throws CompositeException {
         SentenceParser sentenceParser = SentenceParser.getInstance();
         TextComponent sentenceComposite = sentenceParser.parse(filePath);
-//        List<TextComponent> words =
-
+//to do
         return null;
     }
 
@@ -55,7 +55,7 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
     public long countVowel(String filePath) throws CompositeException {
         WordParser wordParser = WordParser.getInstance();
         TextComponent wordComposite = wordParser.parse(filePath);
-        List<TextComponent> symbols = wordComposite.createAllComponents();
+        List<TextComponent> symbols = wordComposite.getAllComponents();
 
         long vowelCount = symbols.stream().filter(o -> o.toString().matches(VOWEL_REGEX)).count();
 
@@ -63,13 +63,33 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
         return vowelCount;
     }
 
+    @Override
+    public long countConsonant(String filePath) throws CompositeException {
+        WordParser wordParser = WordParser.getInstance();
+        TextComponent wordComposite = wordParser.parse(filePath);
+        List<TextComponent> symbols = wordComposite.getAllComponents();
+
+        long consonantCount = symbols.stream().filter(o -> o.toString().matches(CONSONANT_REGEX)).count();
+
+        logger.log(Level.INFO, "The are {} consonants text contains", consonantCount);
+        return consonantCount;
+    }
+
+    @Override
+    public List<TextComponent> deleteSentences(String filePath, int wordsAmount) throws CompositeException {
+        SentenceParser sentenceParser = SentenceParser.getInstance();
+        TextComponent sentenceComposite = sentenceParser.parse(filePath);
+
+//to do
+        return null;
+    }
 
     @Override
     public TextComponent paragraphSort(String filePath) throws CompositeException {
         DocumentParser documentParser = DocumentParser.getInstance();
         TextComponent documentComposite = documentParser.parse(filePath);
         TextComposite sortedText = new TextComposite(CompositeType.PARAGRAPH);
-        List<TextComponent> paragraphs = documentComposite.createAllComponents();
+        List<TextComponent> paragraphs = documentComposite.getAllComponents();
 
         paragraphs.sort(Comparator.comparingInt(TextComponent::size));
 
@@ -82,7 +102,7 @@ public class InfoHandlingServiceImpl implements InfoHandlingService {
     public TextComponent findLongestWord(String filePath) throws CompositeException {
         SentenceParser sentenceParser = SentenceParser.getInstance();
         TextComponent sentenceComposite = sentenceParser.parse(filePath);
-        List<TextComponent> sentences = sentenceComposite.createAllComponents();
+        List<TextComponent> sentences = sentenceComposite.getAllComponents();
 
         TextComponent longestWord = sentences.stream()
                 .max(Comparator.comparingInt(TextComponent::size)).orElseThrow(() ->

@@ -20,13 +20,17 @@ public class TextComposite implements TextComponent {
         this.componentType = componentType;
     }
 
+    public List<TextComponent> getTextComponents() {
+        return textComponents;
+    }
+
     @Override
     public CompositeType getComponentType() {
         return componentType;
     }
 
     @Override
-    public List<TextComponent> createAllComponents() {
+    public List<TextComponent> getAllComponents() {
         return List.copyOf(textComponents);
     }
 

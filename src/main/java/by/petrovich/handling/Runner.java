@@ -19,7 +19,6 @@ public class Runner {
         String textFromReader = null;
         try {
             textFromReader = textReader.read(filePath);
-            WordParser wordParser = WordParser.getInstance();
         } catch (CompositeException e) {
             e.printStackTrace();
         }
@@ -34,6 +33,5 @@ public class Runner {
 
         InfoHandlingServiceImpl infoHandlingService = new InfoHandlingServiceImpl();
         infoHandlingService.findAllComponents(textComponent, CompositeType.TEXT);
-        System.out.println("infoHandlingService: " + infoHandlingService);
     }
 }
