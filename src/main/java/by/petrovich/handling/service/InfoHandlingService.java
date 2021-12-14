@@ -1,11 +1,10 @@
 package by.petrovich.handling.service;
 
 import by.petrovich.handling.entity.TextComponent;
-
-import java.awt.*;
+import by.petrovich.handling.exception.CompositeException;
 
 public interface InfoHandlingService {
-    TextComponent paragraphSort(TextComponent textComponent);
+    TextComponent paragraphSort(String filePath) throws CompositeException;
 
 //    TextComponent paragraphSort(TextComponent text);
 //    List<TextComponent> findSentencesWithLongestWord(TextComponent paragraph);
